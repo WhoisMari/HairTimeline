@@ -1,0 +1,31 @@
+.wrap-filtering {
+	margin-bottom: 20px;
+	.filter-button {
+		padding: 8px 12px;
+		background-color: #fff;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		font-weight: 600;
+	}
+	.wrap-filters{
+		margin-top: 20px;
+		.tags-filter {margin-bottom: 20px;}
+	}
+	.actions {
+		display: flex;
+		margin-top: 20px;
+		.filter-btn, .clear-btn {
+			cursor: pointer;
+			font-weight: 600;
+			padding: 8px 12px;
+			border: 1px solid #6363ad;
+			border-radius: 5px;
+			margin-right: 10px;
+			transition: 0.3s;
+			&:hover {
+				color: #fff;
+				background-color: #8a8aca;
+			}
+		}
+	}
+}

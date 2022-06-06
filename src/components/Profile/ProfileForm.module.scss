@@ -1,0 +1,27 @@
+.wrap-form {
+	label, input, select, textarea, select, .cover-color-wrap {
+		margin-bottom: 20px;
+	}
+
+	input, select, textarea, select {
+		&:focus {
+			border: 1px solid #ced4da;
+			box-shadow: 0 0 0 0.25rem #567f8e38;
+		}
+	}
+}
+
+.primary-btn {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: #fff;
+	background-color: #6363ad;
+	padding: 8px 12px;;
+	border: 1px solid #6363ad;
+	border-radius: 5px;
+	text-decoration: none;
+	margin-top: 10px;
+	font-weight: bold;
+	&:hover {background-color: #6363ad;}
+}

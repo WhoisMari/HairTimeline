@@ -1,0 +1,40 @@
+.wrap-auth {
+	.page-title {color: #49405f;}
+	form {
+		label, input {
+			margin-bottom: 10px;
+		}
+		small, em {
+			color: #646366;
+			display: block;
+		}
+	}
+	.error-messages {
+		display: flex;
+		flex-direction: column;
+		color: #b90e0e;
+		font-size: 13px;
+	}
+	.action {
+		margin: 10px 0px;
+		.auth-message {
+			color: #646366 !important;
+			cursor: pointer;
+		}
+	}
+	.primary-btn {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		color: #fff;
+		background-color: #6363ad;
+		padding: 8px 12px;;
+		border: 1px solid #6363ad;
+		border-radius: 5px;
+		text-decoration: none;
+		margin-top: 10px;
+		margin-right: 10px;
+		&:hover {background-color: #6363ad;}
+		div {margin-left: 10px;}
+	}
+}

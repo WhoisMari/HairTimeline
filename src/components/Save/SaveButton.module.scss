@@ -1,0 +1,53 @@
+.explore-save-btn {
+	padding: 6px 12px;
+	color: #fff;
+	background: #567f8e;
+	border: 1px solid #567f8e;
+	border-radius: 100px;
+	position: absolute;
+	right: 3%;
+	top: 10px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.post-save-btn {
+	color: #567f8e;
+	cursor: pointer;
+	margin-right: 15px;
+	font-size: 1rem;
+}
+
+.dropdown {
+	padding: 10px;
+    background-color: #fff;
+    position: absolute;
+    width: 100%;
+    left: 102%;
+    z-index: 1;
+    border-radius: 0px;
+	font-weight: bold;
+}
+
+.custom {
+	border-color: #567f8e;
+	font-weight: bold;
+}
+
+.wrap-collections {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	font-weight: bold;
+	.badge {
+		margin-right: 10px;
+		margin-top: 10px;
+		background-color: #9485b3;
+		text-align: center;
+		font-size: 15px;
+		.remove-from-collection {
+			cursor: pointer;
+			margin-left: 10px;
+		}
+	}
+}

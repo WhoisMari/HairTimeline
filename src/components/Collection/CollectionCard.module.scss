@@ -1,0 +1,21 @@
+.card {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin: 20px 10px;
+	background-color: #fff;
+	box-shadow: 0px 0px 8px #cdcdcd;
+	border-radius: 4px;
+	padding: 10px;
+	width: 210px;
+	a {
+		text-decoration: none;
+		color: #567f8e;
+		font-weight: 600;
+
+		&:hover {
+			text-decoration: underline;
+			text-underline-position: under;
+		}
+	}
+}

@@ -1,0 +1,38 @@
+.wrapper {margin-top: 120px;}
+.collections-msg {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 300px 300px;
+	font-size: 30px;
+	color: #567f8e;
+}
+.wrap-collection {
+	display: flex;
+	flex-direction: column;
+	.delete-collection{
+		margin-bottom: 20px;
+		button{
+			padding: 6px 12px;
+			color: #fff;
+			font-weight: 600;
+			background: #990d15;
+			border: 1px solid #990d15;
+			border-radius: 100px;
+			&:hover {
+				background: #6d1e22;
+			}
+		}
+	}
+}
+.wrap-saved-cards {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+@media (max-width: 992px) {
+	.collections-msg {
+		padding: 200px 0px;
+	}
+}

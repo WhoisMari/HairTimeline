@@ -1,0 +1,25 @@
+# OS generated files #
+.DS_Store
+.DS_Store?
+._*
+
+.vscode/
+venv/
+__pycache__/
+migrations/
+*.pyc
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+.eslintcache
+
+# production
+/build
+
+# misc
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env

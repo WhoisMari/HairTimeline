@@ -1,0 +1,22 @@
+.wrapper {
+	.wrap-timeline {
+		display: flex;
+		justify-content: center;
+		border: 1px solid violet;
+		span {
+			height: 500px;
+			width: 500px;
+			border: 1px solid black;
+		}
+	}
+
+	.flexing {
+		display: flex;
+		.text {
+			font-size: 44px;
+			line-height: 52px;
+			align-self: center;
+		}
+	}
+	
+}

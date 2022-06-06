@@ -1,0 +1,124 @@
+.wrapper {margin-top: 120px; margin-bottom: 70px;}
+.explore-spinner {text-align: center;}
+.end-message {
+	margin-top: 20px;
+	text-align: center;
+	color: #567f8e;
+	div {color: #9b9a9a;}
+}
+.explore-msg {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 300px 300px;
+	font-size: 30px;
+	color: #567f8e;
+}
+
+#columns {
+	column-width: 312px;
+	column-gap: 15px;
+
+	figure {
+		box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+		transition: opacity .4s ease-in-out;
+		display: inline-block;
+		position: relative;
+		border-radius: 10px;
+		
+		.mobile-overlay {
+			display: none;
+
+			.post-username {
+				position: absolute;
+				text-decoration: none;
+				bottom: 1px;
+				margin-bottom: 0.5em;
+				left: 10px;
+				color: #fff;
+				font-weight: 700;
+				font-size: 20px;
+				text-shadow: 2px 2px 10px #231a3a;
+				&:hover {
+					text-decoration: underline;
+					text-underline-position: under;
+				}
+			}
+		}
+		img {
+			width: 100%; height: auto;
+			opacity: 1;
+			border-radius: 10px;
+		}
+		.post-actions {
+			position: absolute;
+			height: 100%;
+			width: 100%;
+			left: 0;
+			top: 0;
+			bottom: 0;	
+			opacity: 0;
+			background-color: #00000087;
+			position: absolute;
+			transition: all 0.5s ease-in-out 0s;
+			border-radius: 10px;
+			.post-link{
+				width: 100%;
+				height: 100%;
+			}
+			.post-username {
+				position: absolute;
+				text-decoration: none;
+				bottom: 1px;
+				margin-bottom: 0.5em;
+				left: 10px;
+				color: #fff;
+				font-weight: 700;
+				font-size: 20px;
+				&:hover {
+					text-decoration: underline;
+					text-underline-position: under;
+				}
+			}
+			.post-info {
+				position: absolute;
+				top: 10px;
+				margin-bottom: 0.5em;
+				left: 10px;
+				color: #fff;
+			}
+		}
+		&:hover {
+			img {opacity: .9;}
+			.post-actions {opacity: 1;}
+		}
+	}
+}
+@media screen and (max-width: 1000px) {
+	.explore-msg {
+		padding: 200px 0px;
+	}
+	#columns {
+		column-gap: 0px;
+		figure {
+			width: 100%;
+			.mobile-overlay {
+				display: block;
+			}
+		}
+	}
+}
+@media screen and (max-width: 750px) {
+	.explore-msg {
+		padding: 200px 0px;
+	}
+	#columns {
+		column-gap: 0px;
+		figure {
+			width: 100%;
+			.mobile-overlay {
+				display: block;
+			}
+		}
+	}
+}

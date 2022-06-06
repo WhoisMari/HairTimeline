@@ -1,0 +1,47 @@
+.wrap-edit-post-form {
+	display: flex;
+	flex-direction: column;
+	.page-title {color: #49405f;}
+
+	label, input, select, textarea, select {
+		margin-top: 10px;
+	}
+
+	input, select, textarea, select {
+		&:focus {
+			border: 1px solid #ced4da;
+			box-shadow: 0 0 0 0.25rem #567f8e38;
+		}
+	}
+
+	.info-message{
+		color: #646366;
+		font-weight: 400;
+	}
+
+	select {
+		border: 1px solid #ced4da;
+		border-radius: .25rem;
+		width: 100%;
+	}
+
+}
+
+.primary-btn {
+	color: #fff;
+	background-color: #6363ad;
+	padding: 8px 12px;;
+	border: 1px solid #6363ad;
+	border-radius: 5px;
+	text-decoration: none;
+	margin-top: 10px;
+	font-weight: bold;
+	&:hover {background-color: #6363ad;}
+}
+
+.message {
+	font-style: italic;
+	font-size: 14px;
+	.error {color: red;}
+	.success {color: green;}
+}
