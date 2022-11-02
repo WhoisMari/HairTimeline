@@ -103,18 +103,11 @@ class PostView(APIView):
 				return Response({"posts": posts_serializer.data, "has_next": has_next}, status=status.HTTP_200_OK)
 
 			if request.GET.get('tags') != None and request.GET.get('tags') != '':
-				tags = []
-				for tag in request.GET.get('tags'):
-					if tag == ',':
-						continue
-					tags.append(tag)
-				qs_posts = Post.objects.filter(tags__in=tags).distinct()
+				tags = request.GET.get('tags').split(',')
+				qs_posts = qs_posts.filter(tags__in=tags).distinct()
 
-			if request.GET.get('color') != None and request.GET.get('color') != '':
-				colors = []
-				color_hex = f"#{request.GET.get('color')}"
-				color = Color.objects.get(hex=color_hex)
-				colors.append(color.id)
+			if request.GET.get('colors') != None and request.GET.get('colors') != '':
+				colors = request.GET.get('colors').split(',')
 				qs_posts = qs_posts.filter(colors__in=colors).distinct()
 
 			qs_posts = qs_posts.order_by('-timestamp')
@@ -168,12 +161,16 @@ class PostView(APIView):
 				post.date = request.data['date']
 				post.caption = request.data['caption']
 				post.products = request.data['products']
+
 				if request.data['tags'] != None or request.data['tags'] != '':
+					post.tags.clear()
 					for tag in request.data['tags']:
-						if tag == ',':
-							continue
 						post.tags.add(tag)
-				post.colors.add = request.data['colors']
+
+				if request.data['colors'] != None or request.data['colors'] != '':
+					post.colors.clear()
+					for color in request.data['colors']:
+						post.colors.add(color)
 				post.save()
 				return Response('Post edited successfully.')
 			return Response(status=status.HTTP_401_UNAUTHORIZED)
@@ -270,7 +267,8 @@ class FollowView(APIView):
 class UsersView(APIView):
 	parser_classes = (JSONParser, FormParser)
 	def get(self, request, *args, **kwargs):
-		qs_users = User.objects.all().exclude(username__in=['demouser', 'demouser2'])
+		query = request.GET.get('query')
+		qs_users = User.objects.filter(username__icontains=query).exclude(username__in=['demouser', 'demouser2'])
 		user_serialize = UserSerializer(qs_users, many=True)
 		return Response(user_serialize.data)
 
@@ -292,23 +290,3 @@ class DemoTimelineView(APIView):
 		posts = DemoPost.objects.filter(user=user).order_by('-date')
 		serializer = PostSerializer(posts, many=True)
 		return Response(serializer.data)
-
-
-class CreateDemoUser(APIView):
-	parser_classes = (MultiPartParser, FormParser)
-	def get(self, request, *args, **kwargs):
-		user = User.objects.create(email='dumblewhore@example.com', username='Dumblewhore', password='1bananapijama')
-		user.save()
-		return Response('User created!')
-
-
-class DeleteDemoUser(APIView):
-	parser_classes = (MultiPartParser, FormParser)
-	def get(self, request, *args, **kwargs):
-		user = User.objects.get(username='Dumblewhore')
-		qs_posts = Post.objects.filter(user=user)
-		if qs_posts.count() >= 1:
-			for post in qs_posts:
-				post.image.delete()
-		user.delete()
-		return Response('User deleted!')

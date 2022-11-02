@@ -7,15 +7,24 @@
 		color: #5353a2;
 		background: none;
 		border: none;
-		padding: 10px;
 		border-radius: 5px;
 		text-decoration: none; 
 		margin: 0px 10px;
 		font-weight: 600;
 		cursor: pointer;
-		&:hover {
-			text-decoration: underline;
-			text-underline-position: under;
+		position: relative;
+		&:before {
+			background-color: #5353a2;
+			position: absolute;
+			content: "";
+			width: 0;
+			height: 2px;
+			bottom: -1px;
+			left: 0;
+			transition: 0.3s;
+		}
+		&:hover::before {
+			width: 100%;
 		}
 		&:focus {
 			box-shadow: none;

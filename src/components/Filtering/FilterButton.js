@@ -1,16 +1,15 @@
 import React, { useState, useEffect, useCallback } from "react";
-import classes from './Filtering.module.scss';
+import './Filtering.scss';
 import config from '../../config.json';
-import { GithubPicker } from 'react-color';
 import Select from "react-select";
 import makeAnimated from 'react-select/animated';
 
 const FilterButton = (props) => {
 	const [tagsOptions, setTagsOptions] = useState();
 	const [colorsOptions, setColorsOptions] = useState();
-	const [show, setShow] = useState(false);
+	const [show, setShow] = useState(true);
 	const animatedComponents = makeAnimated();
-	const [colors, setColors] = useState('')
+	const [colors, setColors] = useState([]);
 	const [tags, setTags] = useState([]);
 
 	const handleShow = () => {
@@ -31,18 +30,26 @@ const FilterButton = (props) => {
 				tags_list.push({'value': tag.id, 'label': tag.title});
 			});
 			setTagsOptions(tags_list);
-			let colors_list = [];
-			data.colors.forEach(color => {
-				colors_list.push(color.hex)
-			});
-			setColorsOptions(colors_list);
+			setColorsOptions(data.colors);
 		} catch(error) {
 			console.log(error);
 		}
 	}, []);
 
 	const onColors = (color) => {
-		setColors(color.hex.substring(color.hex.indexOf('#') + 1))
+		let colors_list = colors;
+		if (colors_list.includes(color.id)) {
+			for(var i = 0; i < colors_list.length; i++){ 
+				if ( colors_list[i] === color.id) { 
+					colors_list.splice(i, 1); 
+					i--;
+				}
+			}
+		} else {
+			colors_list.push(color.id)
+		}
+		setColors(colors_list);
+		props.filter({"colors": colors, "tags": tags});
 	};
 
 	const onTags = (items) => {
@@ -51,14 +58,7 @@ const FilterButton = (props) => {
 			tags_list.push(item.value);
 		});
 		setTags(tags_list)
-	};
-
-	const clearColors = () => {
-		setColors('');
-	};
-
-	const handleFilters = () => {
-		props.filter({"color": colors, "tags": tags})
+		props.filter({"colors": colors, "tags": tags_list})
 	};
 
 	useEffect(() => {
@@ -66,12 +66,26 @@ const FilterButton = (props) => {
 	}, [fetchFiltersHandler]);
 
 	return (
-		<div className={classes['wrap-filtering']}>
-			<button className={classes['filter-button']} onClick={handleShow}><i className="fa-solid fa-filter"></i> Filters</button>
+		<div className='wrap-filtering'>
+			<button className='filter-button' onClick={handleShow}><i className="fa-solid fa-filter"></i> Filters</button>
 			{show === true && 
 				<form>
-					<div className={`${classes['wrap-filters']} row`}>
-						<div className={`${classes['tags-filter']} col-12 col-md-6`}>
+					<div className='wrap-filters'>
+						{colorsOptions &&
+							<div>
+								{colorsOptions.map((color) => (
+									<label key={color.id} className="checkbox">
+										<input 
+											type="checkbox"
+											onClick={() => onColors(color)}
+											style={{ backgroundColor: color.hex }} 
+										/>
+										<span></span>
+									</label>
+								))}
+							</div>
+						}
+						<div className='tags-filter'>
 							<Select
 								components={animatedComponents}
 								options={tagsOptions}
@@ -80,20 +94,7 @@ const FilterButton = (props) => {
 								onChange={onTags}
 							/>
 						</div>
-						<div className="col-12 col-md-6">
-							<GithubPicker
-								width={'100%'}
-								colors={colorsOptions}
-								triangle={'hide'}
-								onChangeComplete={onColors}
-							/>
-						</div>
 					</div>
-					<div className={classes['actions']}>
-						<div className={classes['clear-btn']} onClick={clearColors}>Clear Colors</div>
-						<div className={classes['filter-btn']} onClick={handleFilters}>Filter</div>
-					</div>
-					
 				</form>
 			}
 		</div>

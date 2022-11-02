@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useEffect, useCallback } from "react";
 import Modal from 'react-bootstrap/Modal';
-import CreatableSelect from "react-select/creatable";
+import Creatable from "react-select/creatable";
 import CollectionBadge from "./CollectionBadge";
 import Loading from '../UI/Loading';
 import classes from './SaveButton.module.scss';
@@ -100,7 +100,7 @@ const SaveModal = (props) => {
 					{message && <span>{message}</span>}
 					{!loading &&
 						<div>
-							<CreatableSelect
+							<Creatable
 								isClearable
 								className={classes['custom']}
 								options={options}

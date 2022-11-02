@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import CommentBox from '../Comment/CommentBox';
 import Likes from '../Like/Likes';
@@ -8,6 +8,9 @@ import config from '../../config.json';
 import classes from './PostDetail.module.scss';
 
 const PostDetail = (props) => {
+	const postContainerRef = useRef()
+	const actionToggleRef = useRef()
+
 	const post = props.post;
 	const user = props.user;
 	const isAuth = props.isAuth;
@@ -32,6 +35,7 @@ const PostDetail = (props) => {
 		setCopied(true);
 	};
 	const handleShowInfo = () => {
+		setShowActions(false)
 		setShowInfo(!showInfo)
 	};
 	const handleShowActions = () => {
@@ -39,6 +43,7 @@ const PostDetail = (props) => {
 		setCopied(false);
 	};
 	const handleShowModal = () => {
+		setShowActions(false)
 		let tags_list = [];
 		if (post.tags !== []) {
 			post.tags.forEach(tag => {
@@ -56,9 +61,10 @@ const PostDetail = (props) => {
 		fetch(`${config.SERVER_URL}/posts/edit/${post.id}/`, {
 			method: 'PUT',
 			headers: {
+				'Content-Type': 'application/json',
 				Authorization: `Token ${localStorage.getItem('token')}`
 			},
-			body: edited_post,
+			body: JSON.stringify(edited_post),
 		})
 		.then(res => res.json())
 		.then((data) => {
@@ -66,7 +72,6 @@ const PostDetail = (props) => {
 		});
 	};
 	const fetchCategoriesHandler = useCallback(async () => {
-		const colors_list = [];
 		const tags_list = [];
 		try {
 			const response = await fetch(`${config.SERVER_URL}/get-categories/`, {
@@ -76,10 +81,7 @@ const PostDetail = (props) => {
 				throw new Error('something went wrong');
 			}
 			const data = await response.json();
-			data.colors.forEach(color => {
-				colors_list.push(color.hex);
-			});
-			setColors(colors_list)
+			setColors(data.colors)
 			data.tags.forEach(tag => {
 				tags_list.push({'value': tag.id, 'label': tag.title});
 			});
@@ -88,6 +90,7 @@ const PostDetail = (props) => {
 			console.log(error);
 		}
 	}, []);
+
 	useEffect(() => {
 		setShowEdit(false);
 		if (user.id === props.current_user.pk) {
@@ -96,9 +99,13 @@ const PostDetail = (props) => {
 		}
 	}, [user.id, props.current_user.pk, fetchCategoriesHandler]);
 
-
 	return (
-		<div className={classes['post-container']}>
+		<div
+			ref={postContainerRef}
+			className={classes['post-container']}
+			onClick={(e) => e.target === postContainerRef.current ? setShowActions(false) : false}
+			onWheel={(e) => e.target === postContainerRef.current ? setShowActions(false) : false}
+		>
 			<div className={classes['wrap-post']}>
 				<div className={classes['wrap-post-header']}>
 					<div className={classes['post-header']}>
@@ -110,7 +117,7 @@ const PostDetail = (props) => {
 						</Link>
 						<div className={classes['post-actions']}>
 							<Likes post_id={post.id} isAuth={isAuth} />
-							<div className={classes['ellipsis']} onClick={handleShowActions}>
+							<div className={classes['ellipsis']} onClick={handleShowActions} ref={actionToggleRef}>
 								<i className="fa-solid fa-ellipsis"></i>
 							</div>
 

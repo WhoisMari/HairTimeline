@@ -46,7 +46,7 @@ const ExplorePage = (props) => {
 	const filterHandler = (filter_list) => {
 		setSelectLoading(true);
 		setFilters(filter_list);
-		fetch(`${config.SERVER_URL}/posts/explore/?page=1&tags=${filter_list['tags']}&color=${filter_list['color']}`, {
+		fetch(`${config.SERVER_URL}/posts/explore/?page=1&tags=${filter_list['tags']}&colors=${filter_list['colors']}`, {
 			method: 'GET',
 		})
 		.then(res => res.json())
@@ -105,6 +105,7 @@ const ExplorePage = (props) => {
 					<span>No posts yet</span>
 				</div>
 			}
+			{error && <span>{error}</span>}
 		</Container>
 		
 	);

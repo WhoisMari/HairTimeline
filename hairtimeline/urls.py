@@ -35,9 +35,6 @@ urlpatterns = [
 	path('<str:action>/<str:post_id>/<str:collection_id>/', views.CollectionsView.as_view()),
 
 	path('<str:action>/<str:user_id>/', views.FollowView.as_view()),
-
-	path('create-my-demo-user/', views.CreateDemoUser.as_view()),
-	path('delete-my-demo-user/', views.DeleteDemoUser.as_view()),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

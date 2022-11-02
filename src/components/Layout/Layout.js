@@ -3,17 +3,12 @@ import { Link } from 'react-router-dom';
 import MainNavigation from './MainNavigation';
 import HamburgerMenu from './HamburgerMenu';
 import logo from './logo.png';
-import classes from './Layout.module.scss'
 import Container from 'react-bootstrap/esm/Container';
 import SearchBar from '../Search/SearchBar';
+import classes from './Layout.module.scss'
 
 const Layout = (props) => {
 	const [isAuth, setIsAuth] = useState(false);
-	const [show, setShow] = useState(false);
-
-	const handleShow = () => {
-		setShow(!show);
-	};
 
 	useEffect(() => {
 		if (localStorage.getItem('token') !== null) {
@@ -28,30 +23,20 @@ const Layout = (props) => {
 					<div className='col-12'>
 						<div className={classes['wrap-header']}>
 							<div className={classes['logo']}>
-
 								<Link to='/'>
 									<img src={logo} alt='Hair Timeline - Logo' />
 								</Link>
 							</div>
-
 							<div className={classes['user-search-bar']}>
-								<SearchBar placeholder={'Are you looking for someone?'} />
+								<SearchBar />
 							</div>
-
 							<div>
 								<MainNavigation isAuth={isAuth} current_user={props.current_user} />
 							</div>
 
-							<div className={`${classes['mobile-menu-wrap']} d-lg-none`}>
-								<div className={classes['user-mobile-search-bar']}>
-								{show && <SearchBar placeholder={'Username'} />}
-									<div className={classes['search-icon']} onClick={handleShow}>
-										<i className="fa-solid fa-magnifying-glass"></i>
-									</div>
-								</div>
+							<div className='d-lg-none'>
 								<HamburgerMenu isAuth={isAuth} current_user={props.current_user} />
 							</div>
-
 						</div>
 					</div>
 				</div>
