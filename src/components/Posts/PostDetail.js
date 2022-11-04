@@ -4,6 +4,7 @@ import CommentBox from '../Comment/CommentBox';
 import Likes from '../Like/Likes';
 import SaveButton from '../Save/SaveButton';
 import EditPostModal from './EditPostModal';
+import noprofile from '../UI/noprofile.png';
 import config from '../../config.json';
 import classes from './PostDetail.module.scss';
 
@@ -111,7 +112,7 @@ const PostDetail = (props) => {
 					<div className={classes['post-header']}>
 						<Link to={`/${user.username}/`} className={classes['username']}>
 							<img src={user.profile_image ?
-								(user.profile_image.substring(0, user.profile_image.indexOf('?'))) : ('https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png')}
+								(user.profile_image.substring(0, user.profile_image.indexOf('?'))) : (noprofile)}
 								alt='' />
 							@{user.username}
 						</Link>

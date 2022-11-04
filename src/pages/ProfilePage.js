@@ -8,10 +8,7 @@ import classes from '../components/Profile/UserProfile.module.scss';
 const ProfilePage = (props) => {
 	const { username } = useParams()
 	const [isLoading, setIsLoading] = useState(true);
-	const [user, setUser] = useState(null);
-	const [follows, setFollows] = useState([]);
-	const [followers, setFollowers] = useState([]);
-	const [following, setFollowing] = useState([]);
+	const [userData, setUserData] = useState([]);
 	const [error, setError] = useState(null);
 	const isAuth = props.isAuth;
 
@@ -27,10 +24,13 @@ const ProfilePage = (props) => {
 			}
 
 			const data = await response.json();
-			setUser(data.user);
-			setFollows(data.follows);
-			setFollowers(data.followers);
-			setFollowing(data.following)
+			let following = [];
+			let followers = [];
+			data.following.forEach(follow => { following.push(follow.following) });
+			data.following = following
+			data.followers.forEach(follower => { followers.push(follower.follower) });
+			data.followers = followers
+			setUserData(data)
 		} catch (error) {
 			setError(true);
 		}
@@ -38,7 +38,7 @@ const ProfilePage = (props) => {
 	}, [username]);
 
 	useEffect(() => {
-			fetchUserHandler();
+		fetchUserHandler();
 	}, [fetchUserHandler]);
 
 	return (
@@ -46,11 +46,8 @@ const ProfilePage = (props) => {
 			{isLoading && <Loading />}
 			{!isLoading && !error &&
 				<UserProfile 
-					user={user}
+					userData={userData}
 					current_user={props.current_user} 
-					follows={follows}
-					following={following}
-					followers={followers}
 					onEditProfile={fetchUserHandler}
 					isAuth={isAuth}
 				/>

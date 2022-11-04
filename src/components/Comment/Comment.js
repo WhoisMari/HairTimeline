@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import noprofile from '../UI/noprofile.png';
 import config from '../../config.json';
 import classes from './Comment.module.scss';
 
@@ -32,7 +33,7 @@ const Comment = (props) => {
 					<img src={props.user.profile_image ? (
 							props.user.profile_image.substring(0, props.user.profile_image.indexOf('?'))
 						) : (
-							'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+							noprofile
 						)} alt=''
 					/>
 					@{props.user.username}

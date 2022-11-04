@@ -63,13 +63,16 @@ class UserProfileView(APIView):
 	def get(self, request, *args, **kwargs):
 		current_user = User.objects.get(username=kwargs['username']) # gets the user, not necessarily logged in
 		user_serializer = UserSerializer(current_user)
-		followers = Follow.objects.filter(following__username=kwargs['username']) # gets the followers queryset for that user
-		follow_serializer = FollowSerializer(followers, many=True)
+		followers = Follow.objects.filter(following=current_user) # gets the followers queryset for that user
+		followers_serializer = FollowSerializer(followers, many=True)
+
+		following = Follow.objects.filter(follower=current_user) # gets the followers queryset for that user
+		following_serializer = FollowSerializer(following, many=True)
+
 		return Response({
 			'user': user_serializer.data, 
-			'follows': follow_serializer.data, 
-			'followers': current_user.followersCount(), # return followers total
-			'following': current_user.followingCount() # return following total
+			'followers': followers_serializer.data, 
+			'following': following_serializer.data,
 		}, status=status.HTTP_200_OK)
 
 	def put(self, request, *args, **kwargs): # to edit user's profile
@@ -259,7 +262,9 @@ class FollowView(APIView):
 					following_user = User.objects.get(id=kwargs['user_id'])
 					if serializer.is_valid():
 						serializer.save(follower=request.user, following=following_user) # creates a follow
-				return Response({'followers': current_user.followersCount()}, status=status.HTTP_200_OK) # returns JSON serialized followers total
+				followers = Follow.objects.filter(following=current_user) # gets the followers queryset for that user
+				followers_serializer = FollowSerializer(followers, many=True)
+				return Response({'followers': followers_serializer.data}, status=status.HTTP_200_OK) # returns JSON serialized followers total
 			return Response('User should be logged in.')
 		return Response('error: not a valid action.', status=status.HTTP_404_NOT_FOUND)
 
