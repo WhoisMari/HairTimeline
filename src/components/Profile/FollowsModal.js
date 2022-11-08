@@ -14,22 +14,28 @@ const FollowsModal = (props) => {
 			</Modal.Header>
 			<Modal.Body>
 				{data &&
-				<Fragment>
-					{data.map((follow) => (
-						<div key={follow.id} className={classes['follow']}>
-							<Link to={`/${follow.username}/`}>
-								<img src={follow.profile_image ? (
-									follow.profile_image.substring(0, follow.profile_image.indexOf('?')) 
-									) : (noprofile)}
-									alt={follow.username}
-								/>
-								<div>
-									<strong>{follow.username}</strong>
+					<>
+						{data.length > 0 ? (
+							<>
+							{data.map((follow) => (
+								<div key={follow.id} className={classes['follow']}>
+									<Link to={`/${follow.username}/`}>
+										<img src={follow.profile_image ? (
+											follow.profile_image.substring(0, follow.profile_image.indexOf('?')) 
+											) : (noprofile)}
+											alt={follow.username}
+										/>
+										<div>
+											<strong>{follow.username}</strong>
+										</div>
+									</Link>
 								</div>
-							</Link>
-						</div>
-					))}
-				</Fragment>
+							))}
+							</>
+						) : (
+							<span>This user does not {action === 'followers' ? 'have any followers yet.' : action =='following' ? 'follow anyone yet.' : ''}</span>
+						)}
+					</>
 				}
 			</Modal.Body>
 		</Modal>

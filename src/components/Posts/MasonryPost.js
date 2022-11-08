@@ -10,7 +10,7 @@ const MasonryPost = (props) => {
 
 	return (
 		<figure>
-			<Link to={`/${props.user}/post/${props.postId}/`}>
+			<Link to={`/${props.user.username}/post/${props.postId}/`}>
 				<img
 					src={post_image}
 					alt={props.date}
@@ -18,18 +18,18 @@ const MasonryPost = (props) => {
 			</Link>
 
 			<div className={classes['post-actions']}>
-				<Link to={`/${props.user}/post/${props.postId}/`}>
+				<Link to={`/${props.user.username}/post/${props.postId}/`}>
 					<div className={classes['post-link']}></div>
 				</Link>
-				<Link to={`/${props.user}/`} className={classes['post-username']}>
-					@{props.user}
+				<Link to={`/${props.user.username}/`} className={classes['post-username']}>
+					@{props.user.username}
 				</Link>
 				{isAuth && <SaveButton postId={props.postId} isExplore={true} />}
 			</div>
 
 			<div className={classes['mobile-overlay']}>
-				<Link to={`/${props.user}/`} className={classes['post-username']}>
-					@{props.user}
+				<Link to={`/${props.user.username}/`} className={classes['post-username']}>
+					@{props.user.username}
 				</Link>
 				<SaveButton postId={props.postId} isExplore={true} />
 			</div>

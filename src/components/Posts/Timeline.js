@@ -6,16 +6,21 @@ import config from '../../config.json';
 import Container from 'react-bootstrap/Container'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Spinner from '../UI/Spinner';
+import { VerticalTimeline }  from 'react-vertical-timeline-component';
+import 'react-vertical-timeline-component/style.min.css';
 import classes from './Timeline.module.scss';
+import Moment from 'moment';
 
 const Timeline = (props) => {
+	Moment.locale('en');
+
 	const [posts, setPosts] = useState(null);
+	const [user, setUser] = useState(null);
 	const [isLoading, setIsLoading] = useState(true);
 	const isHomePage = props.isHomePage;
 	const current_user = props.current_user;
 	const [page, setPage] = useState(1);
 	const [hasNext, setHasNext] = useState(false);
-	const [didMount, setDidMount] = useState(false);
 
 	const infiniteScrollLoader = (
 		<div className={classes['timeline-spinner']}><Spinner isWhite={false} /></div>
@@ -67,6 +72,8 @@ const Timeline = (props) => {
 			setPosts(loadedPosts);
 			setHasNext(data.has_next)
 			setPage(p=>p+1)
+			setUser(loadedPosts[0].user)
+
 		} catch (error) {
 			return;
 		}
@@ -75,17 +82,12 @@ const Timeline = (props) => {
 
 	useEffect(() => {
 		fetchPostsHandler();
-		setDidMount(true);
-		return () => setDidMount(false);
 	}, [fetchPostsHandler]);
 
-	if(!didMount) {
-		return null;
-	}
 
 	return (
 		<Container>
-			{isLoading && <Loading />}
+			{isLoading && posts === null && <Loading />}
 			{posts!== null && posts.length === 0 &&
 				<div className={classes['timeline-msg']}>
 					<i className="fa-solid fa-camera"></i>
@@ -103,20 +105,17 @@ const Timeline = (props) => {
 					loader={infiniteScrollLoader}
 					endMessage={(posts.length >= 1 ? infiniteScrollEndMessage : '')}
 				>
-					<div className={classes['timeline']}>
+					<VerticalTimeline lineColor={user.cover_color ? user.cover_color : '#6363ad'}>
 						{posts.map((post) => (
 							<TimelinePost
 								key={post.id}
-								user={post.user}
-								caption={post.caption}
-								image={post.image}
-								date={post.date}
-								postId={post.post_id}
+								user={user}
+								post={post}
 								current_user={current_user}
 								reload={fetchPostsHandler}
 							/>
 						))}
-					</div>
+					</VerticalTimeline>
 				</InfiniteScroll>
 			}
 		</Container>

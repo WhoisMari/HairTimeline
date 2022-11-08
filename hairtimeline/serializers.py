@@ -22,7 +22,7 @@ class ColorSerializer(serializers.ModelSerializer):
 		fields = ('id' ,'hex')
 
 class PostSerializer(serializers.ModelSerializer):
-	user = serializers.StringRelatedField()
+	user = UserSerializer(read_only=True)
 	tags = TagSerializer(read_only=True, many=True)
 	colors = ColorSerializer(read_only=True, many=True)
 	class Meta:
