@@ -2,7 +2,7 @@ import React, { Fragment, useState, useCallback, useEffect } from 'react';
 import classes from './LikeButton.module.scss';
 import LikeButton from './LikeButton';
 import Spinner from '../UI/Spinner';
-import config from '../../config.json';
+import config from '../../utils/config.json';
 
 const Likes = (props) => {
 	const [liked, setLiked] = useState(false);

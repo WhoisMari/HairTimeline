@@ -3,7 +3,7 @@ import CollectionsList from "../components/Collection/CollectionsList";
 import Container from 'react-bootstrap/Container';
 import classes from '../components/Collection/CollectionsList.module.scss';
 import Loading from '../components/UI/Loading';
-import config from '../config.json';
+import config from '../utils/config.json';
 
 const CollectionsPage = () => {
 	const [isLoading, setIsLoading] = useState(false);

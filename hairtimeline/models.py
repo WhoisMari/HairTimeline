@@ -37,7 +37,7 @@ class NewUser(AbstractBaseUser, PermissionsMixin):
 	date_joined = models.DateTimeField(default=timezone.now)
 	about = models.TextField(_('about'), max_length=150, blank=True)
 	profile_image = models.FileField(blank=True)
-	cover_color = models.CharField(max_length=15)
+	cover_color = models.CharField(max_length=55)
 	is_staff = models.BooleanField(default=False)
 	is_active = models.BooleanField(default=True)
 

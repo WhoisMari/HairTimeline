@@ -1,7 +1,7 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import AuthModal from '../components/Auth/AuthModal.js';
 import Container from 'react-bootstrap/Container'
-import config from '../config.json';
+import config from '../utils/config.json';
 import Moment from 'moment';
 import 'animate.css';
 import classes from '../components/styles/DemoPage.module.scss';

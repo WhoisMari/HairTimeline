@@ -2,14 +2,18 @@ import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal/';
 import Loading from '../UI/Loading';
 import CropperModal from '../Cropper/CropperModal';
-import config from '../../config.json';
-import { SwatchesPicker } from 'react-color';
+import config from '../../utils/config.json';
+import colors from '../../utils/coverColors.json';
 import classes from './ProfileForm.module.scss';
 
 const ProfileForm = (props) => {
-	const [profileImage, setProfileImage] = useState(null);
+	const [firstName, setFirstName] = useState(props.user.first_name);
+	const [lastName, setLastName] = useState(props.user.last_name);
+	const [about, setAbout] = useState(props.user.about);
 	const [coverColor, setCoverColor] = useState(props.user.cover_color);
-	const [about, setAbout] = useState('');
+	const [profileImage, setProfileImage] = useState(null);
+
+
 	const [isLoading, setIsLoading] = useState(false);
 	const [charCounter, setCharCounter] = useState(0);
 	const [error, setError] = useState('');
@@ -26,10 +30,6 @@ const ProfileForm = (props) => {
 		setImageView('Profile')
 		setShow(true);
 	};
-
-	const onChangeCoverColor = (color) => {
-		setCoverColor(color.hex)
-	}
 
 	const croppedImage = (data) => {
 		if (data.imageView === 'Profile') {
@@ -79,7 +79,7 @@ const ProfileForm = (props) => {
 	};
 
 	return (
-		<Modal show={props.handleShow} onHide={props.handleShow}>
+		<Modal show={props.handleShow} onHide={props.handleShow} size='lg'>
 			<Modal.Header>
 				<Modal.Title>Edit Profile</Modal.Title>
 			</Modal.Header>
@@ -87,6 +87,45 @@ const ProfileForm = (props) => {
 				{isLoading && <Loading />}
 				{!isLoading &&
 					<form className={classes['wrap-form']}>
+						<label htmlFor="first-name">First name</label>
+						<input
+							id='first-name'
+							className="form-control"
+							type="text"
+							value={firstName}
+							onChange={e => setFirstName(e.target.value)}
+						/>
+						<label htmlFor="last-name">Last name</label>
+						<input
+							id='last-name'
+							className="form-control"
+							type="text"
+							value={lastName}
+							onChange={e => setLastName(e.target.value)}
+						/>
+						<label htmlFor='about'>About (characters: {charCounter} out of 150)</label>
+						<textarea 
+							className="form-control"
+							type='text'
+							id='about'
+							value={about}
+							onChange={e => onChangeAbout(e)}
+						/>
+						<label htmlFor="cover-image">Cover Color</label>
+						<div>
+							{colors.colors.map((color) => (
+								<label key={color.id} className={classes["checkbox"]}>
+									{console.log(coverColor)}
+									<input
+										onChange={() => setCoverColor(`${color.hex}-${color.hsl}`)}
+										checked={color.hex === coverColor.split('-')[0] ? true : false}
+										type="checkbox"
+										style={{ backgroundColor: color.hex }} 
+									/>
+									<span></span>
+								</label>
+							))}
+						</div>
 						<label htmlFor="profile-image">Profile Image</label>
 						<input
 							className="form-control"
@@ -94,20 +133,6 @@ const ProfileForm = (props) => {
 							id="profile-image"
 							onChange={onChangeProfileImg}
 							accept="image/png, image/jpeg"
-						/>
-						<label htmlFor="cover-image">Cover Color</label>
-						<SwatchesPicker
-							className={classes['cover-color-wrap']}
-							width={'100%'}
-							color={coverColor}
-							onChangeComplete={onChangeCoverColor}
-						/>
-						<label htmlFor='about'>About (characters: {charCounter} out of 150)</label>
-						<textarea 
-							className="form-control"
-							type='text'
-							id='about'
-							onChange={onChangeAbout}
 						/>
 					</form>
 				}

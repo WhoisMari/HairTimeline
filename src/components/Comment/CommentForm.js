@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import config from '../../config.json';
+import config from '../../utils/config.json';
 import classes from './Comment.module.scss';
 
 const CommentForm = (props) => {

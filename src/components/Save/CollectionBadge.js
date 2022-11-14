@@ -1,6 +1,6 @@
 import React from "react";
 import classes from './SaveButton.module.scss';
-import config from '../../config.json';
+import config from '../../utils/config.json';
 
 const CollectionBadge = (props) => {
 	const handleRemove = (event) => {

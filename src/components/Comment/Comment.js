@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import noprofile from '../UI/noprofile.png';
-import config from '../../config.json';
+import config from '../../utils/config.json';
 import classes from './Comment.module.scss';
 
 const Comment = (props) => {
@@ -34,7 +34,7 @@ const Comment = (props) => {
 							props.user.profile_image.substring(0, props.user.profile_image.indexOf('?'))
 						) : (
 							noprofile
-						)} alt=''
+						)} alt={props.user.username}
 					/>
 					@{props.user.username}
 				</Link>

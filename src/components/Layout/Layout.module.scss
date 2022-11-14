@@ -1,10 +1,8 @@
 header {
 	background-color: #fff;
-	position: fixed;
-	top: 0;
 	z-index: 2;
 	width: 100%;
-	box-shadow: 0px 0px 5px #b5b4b4;
+	padding: 20px;
 	.wrap-header {
 		display: flex;
 		justify-content: space-between;
@@ -13,7 +11,7 @@ header {
 		padding: 10px 0px;
 		.logo {
 			img {
-				width: auto;
+				width: 200px;
 			}
 		}
 		.mobile-menu-wrap {

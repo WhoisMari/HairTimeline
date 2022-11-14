@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import UserProfile from '../components/Profile/UserProfile';
 import Loading from '../components/UI/Loading';
-import config from '../config.json';
+import config from '../utils/config.json';
 import classes from '../components/Profile/UserProfile.module.scss';
 
 const ProfilePage = (props) => {

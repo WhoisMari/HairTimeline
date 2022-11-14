@@ -1,7 +1,7 @@
 import React from "react";
 import AsyncSelect from 'react-select/async';
 import { useNavigate } from "react-router-dom";
-import config from '../../config.json';
+import config from '../../utils/config.json';
 
 const SearchBar = (props) => {
 	const navigate = useNavigate()

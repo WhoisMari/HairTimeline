@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Container from 'react-bootstrap/Container'
 import Loading from '../UI/Loading';
-import config from '../../config.json';
+import config from '../../utils/config.json';
 
 import classes from '../styles/Forms.module.scss';
 

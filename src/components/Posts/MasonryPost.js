@@ -13,7 +13,7 @@ const MasonryPost = (props) => {
 			<Link to={`/${props.user.username}/post/${props.postId}/`}>
 				<img
 					src={post_image}
-					alt={props.date}
+					alt={props.user.username}
 				/>
 			</Link>
 

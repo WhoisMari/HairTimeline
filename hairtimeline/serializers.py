@@ -9,7 +9,7 @@ from .models import Post, Collection, Follow, Comment, Like, DemoPost, Tag, Colo
 class UserSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = User
-		fields = ("id", "email", "username", "about", "profile_image", "cover_color", "is_active")
+		fields = ("id", "email", "username", "first_name", "last_name", "about", "profile_image", "cover_color", "is_active")
 
 class TagSerializer(serializers.ModelSerializer):
 	class Meta:

@@ -2,6 +2,7 @@
 
 .wrap-nav {
 	display: flex;
+	justify-content: flex-end;
 	align-items: center;
 	.nav-item {
 		color: #5353a2;
@@ -28,21 +29,6 @@
 		}
 		&:focus {
 			box-shadow: none;
-		}
-	}
-
-	.join-button {
-		font-size: 16px;
-		background-color: #57808f;
-		color: #fff;
-		padding: 8px 12px;;
-		border: 1px solid #57808f;
-		border-radius: 5px;
-		text-decoration: none;
-		font-weight: 600;
-		&:hover {
-			background-color: #507482;
-			transition: background-color .5s, border ease-in-out, transform .5s, box-shadow 5ms, border-color .25s;
 		}
 	}
 }

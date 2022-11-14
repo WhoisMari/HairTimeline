@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react';
 import Container from 'react-bootstrap/esm/Container';
 import NewPostForm from '../components/NewPost/NewPostForm';
 import classes from '../components/styles/Forms.module.scss';
-import config from '../config.json';
+import config from '../utils/config.json';
 
 const NewPostPage = (props) => {
 	const [isLoading, setIsLoading] = useState(false);

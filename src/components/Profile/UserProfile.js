@@ -1,12 +1,11 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import ProfileForm from './ProfileForm';
 import Timeline from '../Posts/Timeline';
-import Container from 'react-bootstrap/Container';
 import Spinner from '../UI/Spinner';
 import noprofile from '../UI/noprofile.png';
 import FollowsModal from './FollowsModal';
 
-import config from '../../config.json';
+import config from '../../utils/config.json';
 import classes from './UserProfile.module.scss';
 
 const UserProfile = (props) => {
@@ -45,57 +44,65 @@ const UserProfile = (props) => {
 	useEffect(() => {
 		const following_user = followers.find(follower => follower.id === current_user.pk)
 		setIsFollowing(following_user ? true : false)
-		document.getElementById('cover-img').style.setProperty(`--cover-color`, user.cover_color);
+		document.getElementById('cover-color').style.setProperty(`--cover-color`, user.cover_color ? user.cover_color.split('-')[0] : '#6363ad');
+		document.getElementById('cover-color').style.setProperty(`--font-color`, user.cover_color ? user.cover_color.split('-')[1] : '240, 31%');
 	}, [current_user, followers, user.cover_color]);
 
 	return (
 		<Fragment>
-			<Container>
-				<div className={classes["wrap-profile"]}>
-					<div className={classes['profile-card']}>
-						<div className={classes['img-user-profile']}>
-							{/* banner */}
-							<div className={classes["profile-bg"]} id='cover-img'></div>
-							<img className={classes["avatar"]} 
-								src={user.profile_image ? (user.profile_image.substring(0, user.profile_image.indexOf('?'))) : (noprofile)}
-								alt=''
-							/>
-						</div>
-						{isAuth && 
-							<Fragment>
-								{current_user.username !== user.username ? (
-									<button
-										onClick={() => handleFollow(isFollowing ? 'unfollow' : 'follow')}
-										className={`${classes['follow-button']} ${isFollowing ? classes['unfollow'] : classes['follow']}`}
-									>
-										<span>{isFollowing ? 'Unfollow' : 'Follow'} </span>
-										{isLoading && <Spinner isWhite={true} />}
-									</button>
+			<div className={classes['profile-container']} id='cover-color'>
+				<div className={`row ${classes['wrap-profile']}`}>
+					<div className={`col-lg-6 col-12 ${classes['avatar']}`}>
+						<img
+							style={{ background: user.profile_image ? '#fff' : '#f1f1f1'}}
+							src={user.profile_image ? (user.profile_image.substring(0, user.profile_image.indexOf('?'))) : (noprofile)}
+							alt={user.username}
+						/>
+					</div>
+					<div className='col-lg-6 col-12'>
+						<div className={classes['user-data']}>
+							<div className={classes['wrap-basic-info']}>
+								<div className={classes['wrap-action']}>
+									<div className={classes['username']}>@{user.username}</div>
+									{isAuth && 
+										<>
+											{current_user.username !== user.username ? (
+												<div
+													className={`${classes['follow-btn']} ${isFollowing ? classes['unfollow'] : classes['follow']}`}
+													onClick={() => handleFollow(isFollowing ? 'unfollow' : 'follow')}
+													title={isFollowing ? 'Unfollow' : 'Follow'}
+												>
+													<span><i className={`fa-solid ${isFollowing ? 'fa-user-minus' : 'fa-user-plus'}`}></i></span>
+													{isLoading && <Spinner isWhite={true} />}
+												</div>
+											) : null}
+										</>
+									}
+									{current_user.username === user.username &&
+										<div className={classes['edit-btn']} onClick={handleShow}>
+											<i className="fa-regular fa-pen-to-square"></i> Edit Profile
+										</div>
+									}
+								</div>
+								{user.first_name || user.last_name ? (
+									<div className={classes['full-name']}>
+										<span>{user.first_name ? user.first_name : null} {user.last_name ? user.last_name : null}</span>
+									</div>
 								) : null}
-							</Fragment>
-						}
-						<div className={classes["user-profile-data"]}>
-							<span className={classes['username']}>@{user.username}</span>
-							<div className={classes["description-profile"]}>{user.about}</div>
-						</div>
-
-						<ul className={classes["data-user"]}>
-							<li onClick={() => handleShowFollows('followers')}>
-								<strong>{followers.length}</strong><span>Followers</span>
-							</li>
-							<li onClick={() => handleShowFollows('following')}>
-								<strong>{following.length}</strong><span>Following</span>
-							</li>
-						</ul>
-						
-						{current_user.username === user.username &&
-							<div className={classes['edit-profile']} onClick={handleShow}>
-								Edit Profile
+								<div className={classes['description-profile']}>{user.about}</div>
 							</div>
-						}
+							<div className={classes['follows-info']}>
+								<div onClick={() => handleShowFollows('followers')}>
+									<span>{followers.length} Followers</span>
+								</div>
+								<div onClick={() => handleShowFollows('following')}>
+									<span>{following.length} Following</span>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-			</Container>
+			</div>
 			<FollowsModal
 				handleShow={showFollows}
 				close={handleHideFollows}

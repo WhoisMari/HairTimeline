@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import config from '../../config.json';
+import config from '../../utils/config.json';
 import classes from './MainNav.module.scss'
 
 const MainNavigation = (props) => {
@@ -41,7 +41,7 @@ const MainNavigation = (props) => {
 					</div>
 				</Fragment>
 			) : (
-				<Link className={classes['join-button']} to={`/login/`}>Join</Link>
+				<Link className={classes['nav-item']} to={`/login/`}>Join</Link>
 			)}
 		</div>
 	);

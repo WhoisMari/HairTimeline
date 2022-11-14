@@ -33,7 +33,7 @@ const FollowsModal = (props) => {
 							))}
 							</>
 						) : (
-							<span>This user does not {action === 'followers' ? 'have any followers yet.' : action =='following' ? 'follow anyone yet.' : ''}</span>
+							<span>This user does not {action === 'followers' ? 'have any followers yet.' : action === 'following' ? 'follow anyone yet.' : ''}</span>
 						)}
 					</>
 				}

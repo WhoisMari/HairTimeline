@@ -1,6 +1,6 @@
 import React from "react";
 import classes from './LikeButton.module.scss';
-import config from '../../config.json';
+import config from '../../utils/config.json';
 
 const LikeButton = (props) => {
 	const handleLike = () => {

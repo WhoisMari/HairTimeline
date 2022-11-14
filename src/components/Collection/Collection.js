@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import Container from 'react-bootstrap/Container'
 import Masonry from '../Posts/Masonry';
 import classes from './CollectionsList.module.scss';
-import config from '../../config.json';
+import config from '../../utils/config.json';
 
 const Collection = () => {
 	const { collection_title } = useParams()

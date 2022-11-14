@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import TimelinePost from'./TimelinePost';
 import Loading from '../UI/Loading';
-import config from '../../config.json';
+import config from '../../utils/config.json';
 import Container from 'react-bootstrap/Container'
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Spinner from '../UI/Spinner';
@@ -105,7 +105,7 @@ const Timeline = (props) => {
 					loader={infiniteScrollLoader}
 					endMessage={(posts.length >= 1 ? infiniteScrollEndMessage : '')}
 				>
-					<VerticalTimeline lineColor={user.cover_color ? user.cover_color : '#6363ad'}>
+					<VerticalTimeline lineColor={user.cover_color ? user.cover_color.split('-')[0] : '#6363ad'}>
 						{posts.map((post) => (
 							<TimelinePost
 								key={post.id}

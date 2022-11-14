@@ -1,136 +1,75 @@
-.wrapper {margin-top: 120px; margin-bottom: 70px;}
-.wrap-profile {
-	margin: 20px auto;
+.profile-container {
 	width: 100%;
-
-	.profile-card {
-		background: #fff;
-		border: 1px solid #ccc;
-		margin-bottom: 20px;
-		position: relative;
-		border-radius: 5px;
-
-		.edit-profile {
-			position: absolute;
-			top: 10px;
-			right: 10px;
-			cursor: pointer;
-			font-size: 12px;
-			color: #fff;
-			background-color: #567f8eb3;
-			border: 1px solid #598190;
-			padding: 6px 12px;
-			border-radius: 100px;
-			&:hover{
-				background: #2a8cb1b3;
-				transition: background .2s ease-in-out;
-			}
-		}
-
-		.img-user-profile {
-			margin: 0 auto;
-			text-align: center; 
-
-			.profile-bg {
-				border-bottom: 2px solid #f5f5f5;
-				width: 100%;
-				height: 160px;
-				background-color: var(--cover-color);
-				border-radius: 5px 5px 0px 0px;
-			}
-
-			.avatar {
-				margin: 0 auto;
-				background: #f1f1f1;
-				width: 112px;
-				height: 112px;
+	background-color: var(--cover-color);
+	--primary-color: hsl(var(--font-color), 25%); 
+	.wrap-profile {
+		width: 100%;
+		min-height: 250px;
+		padding: 50px 0;
+		.avatar {
+			text-align: end;
+			img {
+				width: 150px;
+				height: 150px;
 				padding: 4px;
-				border-radius: 5px;
-				margin-top: -166px;
-				object-fit: cover;
-				object-position: center;
+				border-radius: 10px;
 			}
 		}
-
-		.follow-button {
+		.user-data {
+			height: 100%;
 			display: flex;
-			justify-content: center;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: space-between;
+			color: var(--primary-color);
+			.wrap-basic-info {
+				.wrap-action {
+					display: flex;
+					align-items: center;
+					.username {
+						font-size: 30px;
+						font-weight: 600;
+					}
+					.edit-btn {
+						cursor: pointer;
+						font-weight: 600;
+						border-radius: 10px;
+						margin-left: 40px;
+					}
+				}
+				.description-profile {
+					color: var(--primary-color);
+					margin-top: 20px;
+					font-size: 15px; 
+				}
+			}
+			.follows-info {
+				display: flex;
+				justify-content: space-between;
+				div {
+					cursor: pointer;
+					font-weight: 600;
+					&:first-of-type {
+						margin-right: 40px;
+					}
+				}
+			}
+		}
+		.follow-btn {
+			display: flex;
 			align-items: center;
-			position: absolute;
+			cursor: pointer;
+			margin-left: 40px;
+			padding: 6px;
+			border-radius: 10px;
 			font-size: 13px;
 			font-weight: bold;
-			cursor: pointer;
-			width: 91px; 
-			color: #fff;
+			color: var(--primary-color);
 			outline: none;
-			border-radius: 0 5px 5px 0;
-			padding: 12px 0px;
-		}
-		.follow {
-			background-color: #49405f;
-			border: 1px solid #33294c;
-			&:hover {
-				background: #6b5e8b;
-				transition: background-color .2s ease-in-out;
-				border: 1px solid #6b5e8b;
-			}
-		}
-		.unfollow {
-			background-color: #831313;
-			border: 1px solid #831313;
-			&:hover {
-				background: #6b1010;
-				transition: background-color .2s ease-in-out;
-				border: 1px solid #6b1010;
-			}
-		}
-		.user-profile-data {
-			text-align: center;
-			margin-bottom: 25px;
-			.username {
-				font-size: 30px;
-				color: #292f33;
-			}
-			.description-profile {
-				padding: 0px 10px;
-				margin-top: 20px;
-				text-align: center;
-				color: #75787b;
-				font-size: 15px; 
-			}
-		}
-		.data-user {
-			display: flex;
-			justify-content: space-between;
-			margin-bottom: 0;
-			padding: 0;
-			list-style: none;
-			li {
-				cursor: pointer;
-				border-radius: 0 0 5px 5px;
-				margin: 0;
-				padding: 0;
-				width: 100%;
-				display: table-cell;
-				text-align: center;
-				border-left: 1px solid transparent;
-				background-color: #f7f7f7;
-				border-top: 1px solid #f2f2f280;
-				padding: 10px 0;
-				color: #46494c;
-				strong {
-					display: block;
-					font-weight: 600;
-				}
-				span {
-					line-height: 1;
-					color: #717a7e; 
-				}
-			}
+			border: 1px solid var(--primary-color);
 		}
 	}
 }
-
 .sad-container {
 	display: flex;
 	flex-direction: column;
@@ -140,10 +79,24 @@
 	color: #567f8e;
 	.error {font-size: 48px;}
 }
-
-
 @media screen and (max-width: 750px) {
 	.sad-container {
 		padding: 200px 0px;
+	}
+}
+@media screen and (max-width: 993px) {
+	.profile-container {
+		.wrap-profile {
+			.avatar {
+				text-align: center;
+			}
+			.user-data  {
+				align-items: center;
+				text-align: center;
+				.wrap-action {
+					justify-content: center;
+				}
+			}
+		}
 	}
 }

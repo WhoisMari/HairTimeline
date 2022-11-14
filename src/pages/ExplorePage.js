@@ -4,7 +4,7 @@ import Masonry from '../components/Posts/Masonry';
 import Container from 'react-bootstrap/Container';
 import classes from '../components/Posts/Masonry.module.scss';
 import FilterButton from '../components/Filtering/FilterButton';
-import config from '../config.json';
+import config from '../utils/config.json';
 import Spinner from '../components/UI/Spinner';
 import InfiniteScroll from 'react-infinite-scroll-component';
 

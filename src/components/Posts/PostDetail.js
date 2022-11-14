@@ -5,7 +5,7 @@ import Likes from '../Like/Likes';
 import SaveButton from '../Save/SaveButton';
 import EditPostModal from './EditPostModal';
 import noprofile from '../UI/noprofile.png';
-import config from '../../config.json';
+import config from '../../utils/config.json';
 import classes from './PostDetail.module.scss';
 
 const PostDetail = (props) => {
@@ -113,7 +113,7 @@ const PostDetail = (props) => {
 						<Link to={`/${user.username}/`} className={classes['username']}>
 							<img src={user.profile_image ?
 								(user.profile_image.substring(0, user.profile_image.indexOf('?'))) : (noprofile)}
-								alt='' />
+								alt={user.username} />
 							@{user.username}
 						</Link>
 						<div className={classes['post-actions']}>
@@ -151,7 +151,7 @@ const PostDetail = (props) => {
 					</div>
 				</div>
 				<div className={classes['image-container']}>
-					<img className={classes['post-image']} src={post_image} alt='' />
+					<img className={classes['post-image']} src={post_image} alt={user.username} />
 					{showInfo && 
 						<div className={classes['post-info']}>
 							<div className={classes['close-icon']} onClick={handleShowInfo}><i className="fas fa-times"></i></div>

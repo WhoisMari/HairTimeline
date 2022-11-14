@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import './Filtering.scss';
-import config from '../../config.json';
+import config from '../../utils/config.json';
 import Select from "react-select";
 import makeAnimated from 'react-select/animated';
 

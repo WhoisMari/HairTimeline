@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useParams } from "react-router-dom";
-import config from '../config.json';
+import config from '../utils/config.json';
 import Loading from "../components/UI/Loading";
 import PostDetail from "../components/Posts/PostDetail";
 import Container from "react-bootstrap/esm/Container";

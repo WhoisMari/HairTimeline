@@ -1,6 +1,6 @@
 import React, { Fragment, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import config from '../../config.json';
+import config from '../../utils/config.json';
 import SearchBar from '../Search/SearchBar';
 import classes from './HamburgerMenu.module.scss';
 

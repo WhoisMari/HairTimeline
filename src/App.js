@@ -11,7 +11,7 @@ import ExplorePage from './pages/ExplorePage';
 import Collection from './components/Collection/Collection';
 import AccountPage from './pages/AccountPage';
 import PostPage from './pages/PostPage';
-import config from './config.json';
+import config from './utils/config.json';
 import AuthPage from './pages/AuthPage';
 
 function App() {

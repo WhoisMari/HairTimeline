@@ -4,7 +4,7 @@ import Creatable from "react-select/creatable";
 import CollectionBadge from "./CollectionBadge";
 import Loading from '../UI/Loading';
 import classes from './SaveButton.module.scss';
-import config from '../../config.json';
+import config from '../../utils/config.json';
 
 const SaveModal = (props) => {
 	const [message, setMessage] = useState('');

@@ -1,7 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import Modal from 'react-bootstrap/Modal/';
 import Loading from '../UI/Loading';
-import config from '../../config.json';
+import config from '../../utils/config.json';
 import classes from './AuthForm.module.scss';
 
 const AuthForm = (props) => {

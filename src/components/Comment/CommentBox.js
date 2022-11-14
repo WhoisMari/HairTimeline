@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import config from '../../config.json';
+import config from '../../utils/config.json';
 
 import CommentForm from './CommentForm';
 import CommentsList from './CommentsList';
